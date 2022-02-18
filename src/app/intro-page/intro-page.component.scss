@@ -1,0 +1,14 @@
+h1 {
+  display: flex;
+  justify-content: center;
+  color: green;
+  
+}
+
+.vertical-center {
+    min-height: 100%;  
+    min-height: 100vh; 
+    background-color: rgb(201, 201, 196);
+    display: flex;
+    align-items: center;
+  }
