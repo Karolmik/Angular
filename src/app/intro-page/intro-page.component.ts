@@ -1,29 +1,38 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { User } from '../user';
+import { Router } from '@angular/router';
+import { GetDataService } from '../services/get-data.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-intro-page',
   templateUrl: './intro-page.component.html',
-  styleUrls: ['./intro-page.component.scss']
+  styleUrls: ['./intro-page.component.scss'],
 })
 export class IntroPageComponent implements OnInit {
-  @Output() sendUserObject = new EventEmitter<User>()
+  // @Output() sendUserObject = new EventEmitter<User>()
   @Output() changeState = new EventEmitter<boolean>()
 
-
-  model = new User("", "")
+  constructor(private _router: Router, private _getData: GetDataService, public fb: FormBuilder) {}
+  
+  model = new User('', '', '');
   submitted: boolean = false;
-  public userPanelState: boolean = false
+  public userPanelState: boolean = false;
 
-  startGame() {
-    this.changeState.emit(this.userPanelState)
-  }
+  // startGame() {
+  //   this.changeState.emit(this.userPanelState)
+  //   this._router.navigate(['/game']);
+  // }
 
   onSubmit(dataFromForm: User) {
     this.submitted = true;
-    this.sendUserObject.emit(dataFromForm);
+    this._router.navigate(['/game', dataFromForm.select]);
+    this._getData.getData(dataFromForm);
+    // this.sendUserObject.emit(dataFromForm);
   }
-  public getUserName: string = ''
-  public getUserEmail: string = ''
+  public getUserName: string = '';
+  public getUserEmail: string = '';
 
   getUserArray(userData: User) {
     this.getUserName = userData.userName;
@@ -32,10 +41,21 @@ export class IntroPageComponent implements OnInit {
   refresh(): void {
     window.location.reload();
   }
-
-
-
-  ngOnInit(): void {
-  }
+  
+  public myForm = this.fb.group({
+    userName: ['',[
+      Validators.required,
+      Validators.minLength(4)
+    ]],
+    userEmail: ['',[
+      Validators.required,
+      Validators.email
+    ]],
+    color: ['']
+    
+  })
+  ngOnInit(): void {}
 
 }
+
+  
