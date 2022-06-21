@@ -24,11 +24,12 @@ export class IntroPageComponent implements OnInit {
   //   this.changeState.emit(this.userPanelState)
   //   this._router.navigate(['/game']);
   // }
-
+  
   onSubmit(dataFromForm: User) {
     this.submitted = true;
-    this._router.navigate(['/game', dataFromForm.select]);
+    this._router.navigate(['game', dataFromForm.color]);
     this._getData.getData(dataFromForm);
+    console.log(dataFromForm);
     // this.sendUserObject.emit(dataFromForm);
   }
   public getUserName: string = '';

@@ -23,7 +23,6 @@
           type="email"
           class="form-control"
           id="userEmail"
-          name="userEmail"
           formControlName="userEmail">
         
         <div class="error" *ngIf="">
@@ -32,7 +31,7 @@
       </div>
       <div class="form-group">
         <label for="selectColor">Select Color:</label>
-        <select name="select" id="selectColor" formControlName="color">
+        <select id="selectColor" formControlName="color">
           <option value="normal">Normal</option>
           <option value="high">High Contrast</option>
         </select>

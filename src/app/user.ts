@@ -1,11 +1,11 @@
 export class User {
   public userName: string;
   public userEmail: string;
-  public select: string;
+  public color: string;
 
-  constructor(userName: string, userEmail: string, select: string) {
+  constructor(userName: string, userEmail: string, color: string) {
     this.userName = userName;
     this.userEmail = userEmail;
-    this.select = select;
+    this.color = color;
   }
 }
